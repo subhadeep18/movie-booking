@@ -15,4 +15,6 @@ public interface CinemaService {
     Cinema updateCinema(Cinema updatedCinema, Long id);
 
     void deleteCinemaById(Long id);
+    
+    Integer checkAvailableSeatsByCinema(Long id);
 }

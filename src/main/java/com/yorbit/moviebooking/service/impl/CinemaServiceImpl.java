@@ -65,4 +65,9 @@ public class CinemaServiceImpl implements CinemaService{
 		}
 	}
 
+	@Override
+	public Integer checkAvailableSeatsByCinema(Long id) {
+		return cinemaRepository.checkAvailableSeatsByCinema(id);
+	}
+
 }

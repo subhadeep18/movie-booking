@@ -52,9 +52,9 @@ public class BookingController {
     
     @PostMapping("/bookings")
     public ResponseEntity<?> saveBooking(@RequestBody Booking booking) {
-    	LOGGER.info("Saving a new booking with id:"+ booking.getId());
+    	LOGGER.info("Saving a new booking.");
         Booking savedBooking = bookingService.saveBooking(booking);
-        LOGGER.info("Booking saved successfully with id:"+ booking.getId());
+        LOGGER.info("Booking saved successfully with id:"+ savedBooking.getId());
         return ResponseEntity.status(HttpStatus.CREATED).body(savedBooking);
     }
     

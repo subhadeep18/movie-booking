@@ -1,6 +1,7 @@
 package com.yorbit.moviebooking.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Set;
 
@@ -25,10 +26,13 @@ public class Cinema implements Serializable, Comparable<Cinema>{
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cinema_id")
-    private int id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
+    
+    @Column(name = "booking_date")
+    private LocalDate bookingDate;
     
     @Column(name = "booking_time")
     private LocalTime bookingTime;
@@ -51,11 +55,11 @@ public class Cinema implements Serializable, Comparable<Cinema>{
 		super();
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -65,6 +69,14 @@ public class Cinema implements Serializable, Comparable<Cinema>{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public LocalDate getBookingDate() {
+		return bookingDate;
+	}
+
+	public void setBookingDate(LocalDate bookingDate) {
+		this.bookingDate = bookingDate;
 	}
 
 	public LocalTime getBookingTime() {
@@ -111,9 +123,10 @@ public class Cinema implements Serializable, Comparable<Cinema>{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((bookingDate == null) ? 0 : bookingDate.hashCode());
 		result = prime * result + ((bookingTime == null) ? 0 : bookingTime.hashCode());
 		result = prime * result + ((bookings == null) ? 0 : bookings.hashCode());
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((isAvailable == null) ? 0 : isAvailable.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((screen == null) ? 0 : screen.hashCode());
@@ -130,6 +143,11 @@ public class Cinema implements Serializable, Comparable<Cinema>{
 		if (getClass() != obj.getClass())
 			return false;
 		Cinema other = (Cinema) obj;
+		if (bookingDate == null) {
+			if (other.bookingDate != null)
+				return false;
+		} else if (!bookingDate.equals(other.bookingDate))
+			return false;
 		if (bookingTime == null) {
 			if (other.bookingTime != null)
 				return false;
@@ -140,7 +158,10 @@ public class Cinema implements Serializable, Comparable<Cinema>{
 				return false;
 		} else if (!bookings.equals(other.bookings))
 			return false;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (isAvailable == null) {
 			if (other.isAvailable != null)

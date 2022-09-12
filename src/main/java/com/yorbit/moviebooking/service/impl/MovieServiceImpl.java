@@ -1,13 +1,13 @@
 package com.yorbit.moviebooking.service.impl;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.yorbit.moviebooking.exception.MovieNotFoundException;
@@ -29,8 +29,8 @@ public class MovieServiceImpl implements MovieService{
 	String errorMsg;
 	
 	@Override
-	public List<Movie> getAllMovies() {
-		return movieRepository.findAll();
+	public Page<Movie> getAllMovies(Pageable paging) {
+		return movieRepository.findAll(paging);
 	}
 
 	@Override
