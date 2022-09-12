@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,7 +39,7 @@ public class MovieController {
 	    @RequestParam(defaultValue = "3") int size) {
     	LOGGER.info("Retrieving all movies.");
         List<Movie> movies = new ArrayList<>();
-    	Pageable paging = PageRequest.of(page, size);
+    	Pageable paging = PageRequest.of(page, size, Sort.by("title").ascending());
         Page<Movie> pageMovies = movieService.getAllMovies(paging);
         
         movies = pageMovies.getContent();
