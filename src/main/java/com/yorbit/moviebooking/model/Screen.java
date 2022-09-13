@@ -3,6 +3,7 @@ package com.yorbit.moviebooking.model;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ public class Screen implements Serializable,Comparable<Screen> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="screen_id")
-	private Long id;
+	private Integer id;
 	
 	@Column(name="type")
 	private String type;
@@ -32,7 +33,7 @@ public class Screen implements Serializable,Comparable<Screen> {
 	@JsonIgnore
 	private Movie movie;
 	
-	@OneToMany(mappedBy="screen")
+	@OneToMany(mappedBy="screen", cascade = CascadeType.REMOVE)
 	@JsonIgnore
     private Set<Cinema> cinemas;
 
@@ -40,11 +41,11 @@ public class Screen implements Serializable,Comparable<Screen> {
 		super();
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

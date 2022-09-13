@@ -8,19 +8,19 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.yorbit.moviebooking.model.Booking;
 
-public interface BookingRepository extends JpaRepository<Booking, Long>{
+public interface BookingRepository extends JpaRepository<Booking, Integer>{
 	Page<Booking> findAll(Pageable pageable);
 	
 	@Modifying
-	@Query(value="INSERT into booking(booking_id, booked_seats, is_active, cinema_id, user_id) VALUES (?1, ?2, ?3, ?4, ?5);",
+	@Query(value="INSERT into booking(booking_id, bookedSeats, is_active, cinema_id, user_id) VALUES (?1, ?2, ?3, ?4, ?5);",
 			nativeQuery=true)
-	Booking saveBooking(Long id, Integer bookedSeats, Character isActive, Long cinemaId, Long userId);
+	Integer saveBooking(Integer id, Integer bookedSeats, Character isActive, Integer cinemaId, Integer userId);
 	
 	@Modifying
 	@Query("UPDATE Booking b set b.bookedSeats=?1, b.isActive=?2 where b.id=?3")
-	Booking updateBooking(Integer bookedSeats, Character isActive, Long id);
+	Integer updateBooking(Integer bookedSeats, Character isActive, Integer id);
 	
 	@Modifying
-	@Query("DELETE Booking b wher b.id=?1")
-	void deleteById(Long id);
+	@Query("DELETE Booking b where b.id=?1")
+	void deleteById(Integer id);
 }

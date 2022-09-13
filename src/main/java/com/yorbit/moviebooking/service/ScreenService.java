@@ -8,11 +8,11 @@ public interface ScreenService {
 	
 	List<Screen> getAllScreens();
 
-    Screen getScreenById(Long id);
+    Screen getScreenById(Integer id);
 
     Screen saveScreen(Screen newScreen);
 
-    Screen updateScreen(Screen updatedScreen, Long id);
+    Screen updateScreen(Screen updatedScreen, Integer id);
 
-    void deleteScreenById(Long id);
+    void deleteScreenById(Integer id);
 }

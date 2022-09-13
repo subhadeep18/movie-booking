@@ -52,7 +52,7 @@ public class MovieController {
     }
 
     @GetMapping("/movies/{movie_id}")
-    public ResponseEntity<?> getMovieById(@PathVariable Long movie_id) {
+    public ResponseEntity<?> getMovieById(@PathVariable Integer movie_id) {
     	LOGGER.info("Retrieving movie by id: " + movie_id);
         Movie movie = movieService.getMovieById(movie_id);
         return ResponseEntity.status(HttpStatus.OK).body(movie);
@@ -68,7 +68,7 @@ public class MovieController {
     }
 
     @DeleteMapping("/movies/{movie_id}")
-    public ResponseEntity<?> deleteMovieById(@PathVariable Long movie_id) {
+    public ResponseEntity<?> deleteMovieById(@PathVariable Integer movie_id) {
     	LOGGER.info("Cancelling the movie with id:" + movie_id);
         movieService.deleteMovieById(movie_id);
         LOGGER.info("Movie cancelled successfully for id:" + movie_id);

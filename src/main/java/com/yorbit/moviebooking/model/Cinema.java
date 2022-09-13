@@ -26,7 +26,7 @@ public class Cinema implements Serializable, Comparable<Cinema>{
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cinema_id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "name")
     private String name;
@@ -55,11 +55,11 @@ public class Cinema implements Serializable, Comparable<Cinema>{
 		super();
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

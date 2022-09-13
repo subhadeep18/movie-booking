@@ -8,11 +8,11 @@ import com.yorbit.moviebooking.model.Booking;
 public interface BookingService {
 	Page<Booking> getAllBookings(Pageable paging);
 
-    Booking getBookingById(Long id);
+    Booking getBookingById(Integer id);
 
     Booking saveBooking(Booking newBooking);
 
-    Booking updateBooking(Booking updatedBooking, Long id);
+    Booking updateBooking(Booking updatedBooking, Integer id);
 
-    void deleteBookingById(Long id);
+    void deleteBookingById(Integer id);
 }

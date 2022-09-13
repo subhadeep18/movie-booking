@@ -30,7 +30,7 @@ public class UserController {
     }
     
     @GetMapping("/users/{id}")
-    public ResponseEntity<?> getUserById(@PathVariable Long id) {
+    public ResponseEntity<?> getUserById(@PathVariable Integer id) {
     	LOGGER.info("Retrieving user by id: " + id);
         User movie = userService.getUserById(id);
         return ResponseEntity.status(HttpStatus.OK).body(movie);

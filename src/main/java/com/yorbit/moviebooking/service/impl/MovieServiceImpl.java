@@ -3,25 +3,27 @@ package com.yorbit.moviebooking.service.impl;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.yorbit.moviebooking.exception.DbException;
 import com.yorbit.moviebooking.exception.MovieNotFoundException;
 import com.yorbit.moviebooking.model.Movie;
 import com.yorbit.moviebooking.repository.MovieRepository;
 import com.yorbit.moviebooking.service.MovieService;
 
 @Service
-@PropertySource("classpath:message.properties")
 public class MovieServiceImpl implements MovieService{
 
 	@Autowired
 	private MovieRepository movieRepository;
 	
 	private static final Logger LOGGER = Logger.getLogger(MovieServiceImpl.class);
+	
+	@Value("${globalexception.message}")
+	String globalErrorMsg;
 	
 	@Value("${movienotfound.message}")
 	String errorMsg;
@@ -34,19 +36,26 @@ public class MovieServiceImpl implements MovieService{
 
 	@Override
 	@Transactional(readOnly = true)
-	public Movie getMovieById(Long id) {
+	public Movie getMovieById(Integer id) {
 		return movieRepository.getReferenceById(id);
 	}
 
 	@Override
 	@Transactional
 	public Movie saveMovie(Movie newMovie) {
-		return movieRepository.save(newMovie);
+		Integer result = movieRepository.saveMovie(newMovie.getId(), newMovie.getReleaseDate(),
+				newMovie.getShowCycle(), newMovie.getTitle(), newMovie.getScreen().getId());
+		if(result == 1) {
+			return newMovie;
+		}
+		else {
+			throw new DbException(globalErrorMsg);
+		}
 	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public Movie updateMovie(Movie updatedMovie, Long id) {
+	public Movie updateMovie(Movie updatedMovie, Integer id) {
 		if(movieRepository.existsById(id)) {
 			return movieRepository.save(updatedMovie);
 		}
@@ -58,7 +67,7 @@ public class MovieServiceImpl implements MovieService{
 
 	@Override
 	@Transactional
-	public void deleteMovieById(Long id) {
+	public void deleteMovieById(Integer id) {
 		if(movieRepository.existsById(id)) {
 			movieRepository.deleteById(id);
 		}

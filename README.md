@@ -13,7 +13,10 @@
 - Implement Comparable interface ( for all model classes )
 - Cascade Settings ( modified cascade settings )
 - CRUD Operations ( Added date and time for cinema for booking and seatcheckavailability function )
-- JPA repository ( Used Pageable and Sorting for Booking, Cinema and Movie, Used @Modifiable, @Query annotation, native Queries )
+- JPA repository ( Used Pageable for Booking, Cinema and Pageable and Sorting for Movie, Used @Modifiable, @Query annotation, native Queries )
 - Transactional Management ( added DataSourceTransactionConfig.java and used @Transactional annotation for all service implementations instead of interface )
 - Msgs read from property files  ( added exception messages in the message.properties file and read from it )
-- New Feature Added ( Cinema for seatAvailability check )
+- New Feature Added ( Cinema for seatAvailability check, Internationalization )
+
+###Swagger URL
+http://localhost:8080/swagger-ui/index.html

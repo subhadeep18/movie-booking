@@ -8,11 +8,11 @@ import com.yorbit.moviebooking.model.Movie;
 public interface MovieService {
 	Page<Movie> getAllMovies(Pageable paging);
 
-    Movie getMovieById(Long id);
+    Movie getMovieById(Integer id);
 
     Movie saveMovie(Movie newMovie);
 
-    Movie updateMovie(Movie updatedMovie, Long id);
+    Movie updateMovie(Movie updatedMovie, Integer id);
 
-    void deleteMovieById(Long id);
+    void deleteMovieById(Integer id);
 }

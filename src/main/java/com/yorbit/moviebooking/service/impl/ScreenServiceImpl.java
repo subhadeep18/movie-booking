@@ -5,23 +5,25 @@ import java.util.List;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.yorbit.moviebooking.exception.DbException;
 import com.yorbit.moviebooking.exception.ScreenNotFoundException;
 import com.yorbit.moviebooking.model.Screen;
 import com.yorbit.moviebooking.repository.ScreenRepository;
 import com.yorbit.moviebooking.service.ScreenService;
 
 @Service
-@PropertySource("classpath:message.properties")
 public class ScreenServiceImpl implements ScreenService{
 
 	@Autowired
 	private ScreenRepository screenRepository;
 	
 	private static final Logger LOGGER = Logger.getLogger(ScreenServiceImpl.class);
+	
+	@Value("${globalexception.message}")
+	String globalErrorMsg;
 	
 	@Value("${screennotfound.message}")
 	String errorMsg;
@@ -34,19 +36,25 @@ public class ScreenServiceImpl implements ScreenService{
 
 	@Override
 	@Transactional(readOnly = true)
-	public Screen getScreenById(Long id) {
+	public Screen getScreenById(Integer id) {
 		return screenRepository.getReferenceById(id);
 	}
 
 	@Override
 	@Transactional
 	public Screen saveScreen(Screen newScreen) {
-		return screenRepository.save(newScreen);
+		Integer result = screenRepository.saveScreen(newScreen.getId(), newScreen.getType());
+		if(result == 1) {
+			return newScreen;
+		}
+		else {
+			throw new DbException(globalErrorMsg);
+		}
 	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public Screen updateScreen(Screen updatedScreen, Long id) {
+	public Screen updateScreen(Screen updatedScreen, Integer id) {
 		if(screenRepository.existsById(id)) {
 			return screenRepository.save(updatedScreen);
 		}
@@ -58,7 +66,7 @@ public class ScreenServiceImpl implements ScreenService{
 
 	@Override
 	@Transactional
-	public void deleteScreenById(Long id) {
+	public void deleteScreenById(Integer id) {
 		if(screenRepository.existsById(id)) {
 			screenRepository.deleteById(id);
 		}

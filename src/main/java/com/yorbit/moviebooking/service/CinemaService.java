@@ -8,13 +8,13 @@ import com.yorbit.moviebooking.model.Cinema;
 public interface CinemaService {
 	Page<Cinema> getAllCinemas(Pageable paging);
 
-    Cinema getCinemaById(Long id);
+    Cinema getCinemaById(Integer id);
 
     Cinema saveCinema(Cinema newCinema);
 
-    Cinema updateCinema(Cinema updatedCinema, Long id);
+    Cinema updateCinema(Cinema updatedCinema, Integer id);
 
-    void deleteCinemaById(Long id);
+    void deleteCinemaById(Integer id);
     
-    Integer checkAvailableSeatsByCinema(Long id);
+    Integer checkAvailableSeatsByCinema(Integer id);
 }

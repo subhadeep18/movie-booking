@@ -67,7 +67,7 @@ public class BookingController {
     }
     
     @DeleteMapping("/bookings/{id}")
-    public ResponseEntity<?> cancelBooking(@PathVariable Long id) {
+    public ResponseEntity<?> cancelBooking(@PathVariable Integer id) {
     	LOGGER.info("Cancelling the booking with id:"+id);
     	bookingService.deleteBookingById(id);
     	LOGGER.info("Booking cancelled successfully for id:"+id);

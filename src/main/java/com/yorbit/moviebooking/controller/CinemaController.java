@@ -49,7 +49,7 @@ public class CinemaController {
     }
     
     @GetMapping("/checkSeats/{id}")
-    public ResponseEntity<?> checkAvailableSeatsByCinema(@PathVariable Long id) {
+    public ResponseEntity<?> checkAvailableSeatsByCinema(@PathVariable Integer id) {
     	LOGGER.info("Retriving seat availability for the cinema with id: " + id);
     	Integer seats = cinemaService.checkAvailableSeatsByCinema(id);
     	Map<String, Object> response = new HashMap<>();
@@ -60,7 +60,7 @@ public class CinemaController {
     }
     
     @GetMapping("/cinemas/{id}")
-    public ResponseEntity<?> getCinemaById(@PathVariable Long id) {
+    public ResponseEntity<?> getCinemaById(@PathVariable Integer id) {
     	LOGGER.info("Retrieving movie by id: " + id);
         Cinema cinema = cinemaService.getCinemaById(id);
         return ResponseEntity.status(HttpStatus.OK).body(cinema);

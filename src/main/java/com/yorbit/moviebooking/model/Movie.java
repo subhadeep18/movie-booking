@@ -22,7 +22,7 @@ public class Movie implements Serializable, Comparable<Movie>{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="movie_id")
-	private Long id;
+	private Integer id;
 	
 	@Column(name="title")
 	private String title;
@@ -41,11 +41,11 @@ public class Movie implements Serializable, Comparable<Movie>{
 		super();
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

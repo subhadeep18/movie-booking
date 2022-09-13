@@ -7,11 +7,11 @@ import com.yorbit.moviebooking.model.User;
 public interface UserService {
 	List<User> getAllUsers();
 
-    User getUserById(Long id);
+    User getUserById(Integer id);
 
     User saveUser(User newUser);
 
-    User updateUser(User updatedUser, Long id);
+    User updateUser(User updatedUser, Integer id);
 
-    void deleteUserById(Long id);
+    void deleteUserById(Integer id);
 }

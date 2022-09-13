@@ -23,7 +23,7 @@ public class User implements Serializable,Comparable<User> {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "user_name")
     private String userName;
@@ -31,7 +31,7 @@ public class User implements Serializable,Comparable<User> {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     @JsonIgnore
     private Set<Booking> bookings;
 
@@ -39,11 +39,11 @@ public class User implements Serializable,Comparable<User> {
 		super();
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
